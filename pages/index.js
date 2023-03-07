@@ -8,15 +8,26 @@ export default function Home() {
       </Head>
       <main>
         <h1>Netlify Forms to Notion</h1>
-        <form name="contact" method="POST" data-netlify="true">
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          encType="multipart/form-data"
+          action="/"
+        >
           <p>
             <label>
-              Your Name: <input type="text" name="name" />
+              Ditt navn: <input type="text" name="navn" />
             </label>
           </p>
           <p>
             <label>
-              Your Email: <input type="email" name="email" />
+              Beløp: <input type="number" name="verdi" />
+            </label>
+          </p>
+          <p>
+            <label htmlFor="">
+              File: <input type="file" name="file" />
             </label>
           </p>
           <p>

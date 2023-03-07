@@ -2,28 +2,40 @@ const { Client } = require("@notionhq/client");
 exports.handler = async function (event) {
   const form = JSON.parse(event.body).payload.data;
   const notion = new Client({ auth: process.env.NOTION_TOKEN });
+
+  console.log({ form });
   try {
     const new_row = {
       parent: {
         database_id: process.env.DATABASE_ID,
       },
       properties: {
-        Name: {
+        Navn: {
           title: [
             {
               text: {
-                content: form.name,
+                content: form.navn,
               },
             },
           ],
         },
-        Email: {
-          email: form.email,
+        Verdi: {
+          number: parseInt(form.verdi),
+        },
+        Fil: {
+          files: [
+            {
+              name: form.file.filename,
+              external: {
+                url: form.file.url,
+              },
+            },
+          ],
         },
       },
     };
     await notion.pages.create(new_row);
-  } catch {
+  } catch (error) {
     console.log(error);
   }
   return {
